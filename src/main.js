@@ -17,19 +17,19 @@ import 'swiper/css/swiper.css'
 
 // Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
 Vue.use(VuePlyr, {
-  plyr: {
-    settings:['quality', 'speed', 'loop'],
-    controls:['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'fullscreen'],
-    quality:{ default: 360, options: [1080, 720, 480, 360] },
-    speed:{ selected: 1, options: [0.5, 1, 1.5, 2] },
-    clickToPlay:true
-  }
+    plyr: {
+        settings: ['quality', 'speed', 'loop'],
+        controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'settings', 'airplay', 'fullscreen'],
+        quality: { default: 360, options: [1080, 720, 480, 360] },
+        speed: { selected: 1, options: [0.5, 1, 1.5, 2] },
+        clickToPlay: true
+    }
 })
 let options = {
-  durations:{
-    success: 4000,
-    warning: 4000
-  }
+    durations: {
+        success: 4000,
+        warning: 4000
+    }
 }
 
 Vue.use(VueAWN, options)
@@ -37,13 +37,13 @@ Vue.use(VueAWN, options)
 
 Vue.use(VueAxios, axios, VueAwesomeSwiper)
 
-window.$ = window.jQuery = require('jquery');
+// window.$ = window.jQuery = require('jquery');
 
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  axios,
-  render: h => h(App),
+    router,
+    store,
+    axios,
+    render: h => h(App),
 }).$mount('#app')

@@ -1,4 +1,4 @@
-<template>
+<template lang="ru">
 <div class="presentation">
     <div class="course-present">
         <div class="course-present-title">
@@ -7,85 +7,29 @@
             </div>
             <div class="course-author">
                 <div class="name-author">
-                    <router-link :to="`/author/${course.owner}`"
-                        @click.native="authorClicked(course)">{{course.username}}
+                    <router-link :to="`/author/${course.owner}`" @click.native="authorClicked(course)">{{course.username}}
                     </router-link>
                 </div>
                 <div class="follow-author fa fa-circle">
-                    <button @click="followAutOrUnfollow(course.owner)" class="follow-author-btn" 
-                     v-on:click="sub=!sub">
-                    <span>{{ subText }}</span>
+                    <button @click="followAutOrUnfollow(course.owner)" class="follow-author-btn" v-on:click="sub=!sub">
+                        <span>{{ subText }}</span>
                     </button>
                 </div>
-                <!-- <div class="present-raiting">
-                    <span class="present-star fa fa-star"></span>
-                    <span class="sr-raiting">{{course.rating}}</span>
-                </div> -->
-                
+
             </div>
         </div>
+
         <div class="video-row">
-            <div class="present-video">
-                <div class="buy-course" v-show="buyCourseShow">
-                    <span class="buy-desc"> 
-                        Доступ по подписке
-                    </span>
-                    <div @click="buyCourse(course.id)" class="buy-btn">Оформить подписку</div>
-                </div>
-                <div class="player" v-show="playerShow">
-                    <vue-plyr  >
-                        <video
-                            controls
-                            crossorigin
-                            playsinline
-                            :src="`${this.lesson.video}`"
-                        >
-                            <source
-                            size=""
-                            :src="`${this.lesson.video}`"
-                            type="video/mp4"
-                            />,
-                            <source
-                            size="360"
-                            :src="`${this.lesson.video}`"
-                            type="video/mp4"
-                            />,
-                            <source
-                            size="480"
-                            :src="`${this.lesson.video}`"
-                            type="video/mp4"
-                            />,
-                            <source
-                            size="720"
-                            :src="`${this.lesson.video}`"
-                            type="video/mp4"
-                            />,
-                            <source
-                            size="1080"
-                            :src="`${this.lesson.video}`"
-                            type="video/mp4"
-                            />
-                            <!-- <track
-                            default
-                            kind="captions"
-                            label="Русский"
-                            src="/path/to/english.vtt"
-                            srclang="ru"
-                            /> -->
-                        </video>
-                    </vue-plyr>
-                </div>
-                <!-- <img :src="`${baseUrl}${course.photo}`" alt="video-img"> -->
-            </div>
+            
+            <Player :key="componentKey" :playerShow="playerShow" :lesson="lesson" :buyCourseShow="buyCourseShow" :course="course" />
+
             <div class="playlist">
                 <div class="summary-time">
                     {{course.lessons_count}} Уроков({{course.course_duration}})
                 </div>
                 <div class="video-list">
                     <ol>
-                        <li class="present-video-item"
-                        v-for="lessonItem in lessonList" :key="lessonItem.id"
-                        @click="loadLesson(lessonItem.id)">
+                        <li class="present-video-item" v-for="lessonItem in lessonList" :key="lessonItem.id" @click="loadLesson(lessonItem.id)">
                             <div class="present-video-info fa fa-play">
                                 <span class="info">{{lessonItem.title}}</span>
                             </div>
@@ -95,6 +39,7 @@
                 </div>
             </div>
         </div>
+
         <div class="views-pr-wrapper">
             <div class="present-views fa fa-eye">
                 <div class="present-v-counter">{{course.views}}</div>
@@ -105,17 +50,14 @@
         </div>
         <div class="useful-btns">
             <div class="save-btn">
-                <button v-bind:class="{'fa-bookmark': isActiveSave, 'fa-check-square-o':isActiveDontSave}" 
-                v-on:click="saveCourse(course.id)" class="fa">{{ saveText }}</button>
+                <button v-bind:class="{'fa-bookmark': isActiveSave, 'fa-check-square-o':isActiveDontSave}" v-on:click="saveCourse(course.id)" class="fa">{{ saveText }}</button>
             </div>
-            <div class="video-recomend-btn" >
-                <button @click="likeCourse()" class="fa fa-thumbs-o-up" v-show="likeShow" 
-                >{{ likeText }}
+            <div class="video-recomend-btn">
+                <button @click="likeCourse()" class="fa fa-thumbs-o-up" v-show="likeShow">{{ likeText }}
                 </button>
                 <!-- <div class="pr-rating-area" v-show="stars">
                     <input type="radio" id="star-5" name="rating" value="5">
-                    <label v-on:click="stars=false, likeShow=true, like=true" for="star-5" title="Оценка «5»"></label>	
-                    <input type="radio" id="star-4" name="rating" value="4">
+                    <label v-on:click="stars=false, likeShow=true, like=true" for="star-5" title="Оценка «5»"></label>		                    <input type="radio" id="star-4" name="rating" value="4">
                     <label v-on:click="stars=false, likeShow=true, like=true" for="star-4" title="Оценка «4»"></label>    
                     <input type="radio" id="star-3" name="rating" value="3">
                     <label v-on:click="stars=false, likeShow=true, like=true" for="star-3" title="Оценка «3»"></label>  
@@ -124,9 +66,9 @@
                     <input type="radio" id="star-1" name="rating" value="1">
                     <label v-on:click="stars=false, likeShow=true, like=true" for="star-1" title="Оценка «1»"></label>
                 </div> -->
-                
+
             </div>
-            
+
         </div>
     </div>
     <div class="course-info-wrapper">
@@ -140,12 +82,11 @@
             <!-- <div class="comments">
                 <button class="info-btn" v-on:click="showCom=true, showDisc=false, showDop=false, showAut=false">Комментарии</button>
             </div> -->
-            
-            
+
         </div>
-       
+
     </div>
-    
+
     <div class="text-about-wrapper">
         <div class="about" v-show="showDisc">
             <h5>Описание</h5>
@@ -171,8 +112,7 @@
                         <img :src="`${authorPresent.photo}`" alt="author-avatar">
                     </div>
                     <div class="author-info-present">
-                        <router-link class="present-author-name" :to="`/author/${course.owner}`"
-                        @click.native="authorClicked(course)">{{course.username}}
+                        <router-link class="present-author-name" :to="`/author/${course.owner}`" @click.native="authorClicked(course)">{{course.username}}
                         </router-link>
                         <div class="geoposition fa fa-map-marker">{{authorPresent.geo}}</div>
                     </div>
@@ -183,7 +123,7 @@
                     </div>
                     <div class="courses-count">
                         <span class="fa fa-graduation-cap">{{authorPresent.courses_count}}<span> курсов</span></span>
-                        
+
                     </div>
                 </div>
                 <!-- <ul class="social-author">
@@ -194,55 +134,59 @@
                     <li><a href="#"><div><i class="fa fa-youtube"></i></div></a></li>
                 </ul> -->
                 <div class="follow-btn">
-                <button class="fa" v-bind:class="{'fa-plus': isActivePlus}" 
-                v-on:click="sub=!sub,followAutOrUnfollow(course.owner)">{{ subText }}</button>
+                    <button class="fa" v-bind:class="{'fa-plus': isActivePlus}" v-on:click="sub=!sub,followAutOrUnfollow(course.owner)">{{ subText }}</button>
                 </div>
             </div>
         </div>
-        
+
     </div>
     <Recomended :listRec="listRec" />
     <Popular :listPop="listPop" />
 </div>
 </template>
+
 <script>
 import Recomended from "../Recomended.vue";
 import Popular from "../Popular.vue";
+import Player from "./Player.vue";
 export default {
-    name:"Presentation",
-    data(){
+    name: "Presentation",
+    data() {
         return {
-            listRec:[],
-            listPop:[],
-            buyCourseShow:true,
-            playerShow:false,
+            listRec: [],
+            listPop: [],
+            buyCourseShow: true,
+            playerShow: false,
 
-            showDisc:true,
-            showDop:false,
-            showCom:false,
-            sub:true,
-            save:true,
-            like:false,
-            likeShow:true,
-            stars:false,
-            isActivePlus:true,
-            isActiveSave:true,
-            isActiveDontSave:false,
-            course:{},
-            lessonList:[],
-            authorPresent:{},
-            likeText:'',
-            subText:'',
-            saveText:' Сохранить',
-            lesson:{}
+            showDisc: true,
+            showDop: false,
+            showCom: false,
+            sub: true,
+            save: true,
+            like: false,
+            likeShow: true,
+            stars: false,
+            isActivePlus: true,
+            isActiveSave: true,
+            isActiveDontSave: false,
+            course: {},
+            lessonList: [],
+            authorPresent: {},
+            likeText: '',
+            subText: '',
+            saveText: ' Сохранить',
+            lesson: {},
+            componentKey: 0,
+            // player: this.$refs.plyr.player,
         }
     },
-    components:{
+    components: {
         Recomended,
-        Popular
+        Popular,
+        Player,
     },
-    async created(){
-        this.$root.$refs.Presentation=this
+    async created() {
+        this.$root.$refs.Presentation = this
         this.checklikeCourse()
         this.loadCourseByClick()
         this.listPop = await this.loadList("/api/courses?filter=popular")
@@ -250,240 +194,243 @@ export default {
         this.listRec = await this.loadList("/api/courses?filter=recommended")
         this.listRec = this.listRec.results
         // this.checkFollowAut()
+        console.log(this.$refs)
+        // this.$refs.plyr.player.on('playing', event => {
+        //     console.log(event)
+        //     console.log(event.detail)
+        //     console.log(event.detail.plyr)
+        // })
+        
+
     },
     computed: {
-      baseUrl(){
-        return this.$store.getters.getServerUrl
-      },
-    },
-    methods:{
-        async loadLesson(lessonId){
-            this.lesson=await this.loadList(`/api/lesson/${lessonId}`)
+        baseUrl() {
+            return this.$store.getters.getServerUrl
         },
-        async checkSaveCourse(courseId){
-            if(this.$store.getters.getId!=null){
+    },
+    methods: {
+        forceRerender() {
+            this.componentKey += 1;
+        },
+        async loadLesson(lessonId) {
+            this.lesson = await this.loadList(`/api/lesson/${lessonId}`)
+            console.log('Videos', this.lesson.videos)
+            this.forceRerender()
+
+        },
+        async checkSaveCourse(courseId) {
+            if (this.$store.getters.getId != null) {
                 const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/course/issaved`,
-                {
-                    user_id : this.$store.getters.getId,
-                    course_id : courseId
-                })
-                .then(response => {
-                    if(response.data.detail=='saved'){
-                        this.saveText=' Сохранено'
-                        this.isActiveDontSave=true
-                        this.isActiveSave=false
-                    }else{
-                        this.saveText=' Сохранить'
-                        this.isActiveSave=true
-                        this.isActiveDontSave=false
-                    }
-                    return response.data
-                })
+                    .post(`${this.$store.getters.getServerUrl}/api/course/issaved`, {
+                        user_id: this.$store.getters.getId,
+                        course_id: courseId
+                    })
+                    .then(response => {
+                        if (response.data.detail == 'saved') {
+                            this.saveText = ' Сохранено'
+                            this.isActiveDontSave = true
+                            this.isActiveSave = false
+                        } else {
+                            this.saveText = ' Сохранить'
+                            this.isActiveSave = true
+                            this.isActiveDontSave = false
+                        }
+                        return response.data
+                    })
                 return listA
-            }else{
-                this.saveText=' Сохранить'
-                this.isActiveSave=true
+            } else {
+                this.saveText = ' Сохранить'
+                this.isActiveSave = true
             }
         },
-        async saveCourse(courseId){
-            if (this.$store.getters.getIsAuthenticated==true){
-                if(this.saveText==' Сохранить'){
+        async saveCourse(courseId) {
+            if (this.$store.getters.getIsAuthenticated == true) {
+                if (this.saveText == ' Сохранить') {
                     const listA = await this.axios
-                    .post(`${this.$store.getters.getServerUrl}/api/course/save`,
-                    {
-                        user_id : this.$store.getters.getId,
-                        course_id : courseId
+                        .post(`${this.$store.getters.getServerUrl}/api/course/save`, {
+                            user_id: this.$store.getters.getId,
+                            course_id: courseId
+                        })
+                        .then(response => {
+                            this.loadCourseByClick()
+                            return response.data
+                        })
+                    return listA
+                } else {
+                    this.$awn.success('Данный курс уже сохранен!', this.$options)
+                }
+
+            } else {
+                this.$awn.warning('Чтобы сохранить курс нужно Авторизоваться', this.$options)
+            }
+        },
+        async checkBoughtCourse(courseId) {
+            if (this.$store.getters.getId != null) {
+                const listA = await this.axios
+                    .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/isbought`, {
+                        user_id: this.$store.getters.getId,
+                        course_id: courseId
+                    })
+                    .then(response => {
+                        if (response.data.detail == 'bought') {
+                            this.buyCourseShow = false
+                            this.playerShow = true
+                        } else {
+                            this.buyCourseShow = true
+                            this.playerShow = false
+                        }
+                        return response.data
+                    })
+                return listA
+            } else {
+                this.buyCourseShow = true
+                this.playerShow = false
+            }
+        },
+        async buyCourse(courseId) {
+            if (this.$store.getters.getIsAuthenticated == true) {
+
+                const listA = await this.axios
+                    .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/buy`, {
+                        user_id: this.$store.getters.getId,
+                        course_id: courseId
+                    })
+                    .then(response => {
+                        this.buyCourseShow = false
+                        this.playerShow = true
+                        this.forceRerender()
+                        return response.data
+                    })
+                return listA
+            } else {
+                this.$awn.warning('Для покупки нужно Авторизоваться', this.$options)
+            }
+        },
+        async checkFollowAut(ownerId) {
+            if (this.$store.getters.getId != null) {
+                const listA = await this.axios
+                    .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/isfollow`, {
+                        user_id: this.$store.getters.getId,
+                        follow_id: ownerId
+                    })
+                    .then(response => {
+                        if (response.data.detail == 'followed') {
+                            this.subText = "Вы подписаны"
+                            this.isActivePlus = false
+                        } else {
+                            this.subText = "Подписаться"
+                            this.isActivePlus = true
+                        }
+                        if (this.$store.getters.getId == ownerId) {
+                            this.subText = "Это Ваш профиль"
+                            this.isActivePlus = false
+                        }
+                        return response.data
+                    })
+                return listA
+            } else {
+                this.subText = "Подписаться"
+            }
+        },
+        async followAutOrUnfollow(ownerId) {
+            if (this.subText == "Подписаться") {
+                this.followAut(ownerId)
+            } else {
+                this.unFollowAut(ownerId)
+            }
+        },
+        async followAut(ownerId) {
+            if (this.$store.getters.getIsAuthenticated == true) {
+
+                const listA = await this.axios
+                    .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/follow`, {
+                        user_id: this.$store.getters.getId,
+                        follow_id: ownerId
                     })
                     .then(response => {
                         this.loadCourseByClick()
                         return response.data
                     })
-                    return listA
-                }else{
-                    this.$awn.success('Данный курс уже сохранен!', this.$options)
-                }
-                
-            }else{
-                this.$awn.warning('Чтобы сохранить курс нужно Авторизоваться', this.$options)
-            }
-        },
-        async checkBoughtCourse(courseId){
-            if(this.$store.getters.getId!=null){
-                const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/isbought`,
-                {
-                    user_id : this.$store.getters.getId,
-                    course_id : courseId
-                })
-                .then(response => {
-                    if(response.data.detail=='bought'){
-                        this.buyCourseShow=false
-                        this.playerShow=true
-                    }else{
-                        this.buyCourseShow=true
-                        this.playerShow=false
-                    }
-                    return response.data
-                })
                 return listA
-            }else{
-                this.buyCourseShow=true
-                this.playerShow=false
-            }
-        },
-        async buyCourse(courseId){
-            if (this.$store.getters.getIsAuthenticated==true){
-                
-                const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/buy`,
-                {
-                    user_id : this.$store.getters.getId,
-                    course_id : courseId
-                })
-                .then(response => {
-                    this.buyCourseShow=false
-                    this.playerShow=true
-                    return response.data
-                })
-                return listA
-            }else{
-                this.$awn.warning('Для покупки нужно Авторизоваться', this.$options)
-            }
-        },
-        async checkFollowAut(ownerId){
-            if(this.$store.getters.getId!=null){
-                const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/isfollow`,
-                {
-                    user_id : this.$store.getters.getId,
-                    follow_id : ownerId
-                })
-                .then(response => {
-                    if(response.data.detail=='followed'){
-                        this.subText="Вы подписаны"
-                        this.isActivePlus=false
-                    }else{
-                        this.subText="Подписаться"
-                        this.isActivePlus=true
-                    }
-                    if(this.$store.getters.getId==ownerId){
-                        this.subText="Это Ваш профиль"
-                        this.isActivePlus=false
-                    }
-                    return response.data
-                })
-                return listA
-            }else{
-                this.subText="Подписаться"
-            }
-        },
-        async followAutOrUnfollow(ownerId){
-            if (this.subText=="Подписаться"){
-                this.followAut(ownerId)
-            }else{
-                this.unFollowAut(ownerId)
-            }
-        },
-        async followAut(ownerId){
-            if (this.$store.getters.getIsAuthenticated==true){
-                
-                const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/follow`,
-                {
-                    user_id : this.$store.getters.getId,
-                    follow_id : ownerId
-                })
-                .then(response => {
-                        this.loadCourseByClick()
-                    return response.data
-                })
-                return listA
-            }else{
+            } else {
                 this.$awn.warning('Для подписки нужно Авторизоваться', this.$options)
             }
         },
-        async unFollowAut(ownerId){
-            if (this.$store.getters.getIsAuthenticated==true){
-                
+        async unFollowAut(ownerId) {
+            if (this.$store.getters.getIsAuthenticated == true) {
+
                 const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/unfollow`,
-                {
-                    user_id : this.$store.getters.getId,
-                    follow_id : ownerId
-                })
-                .then(response => {
+                    .post(`${this.$store.getters.getServerUrl}/api/accounts/profile/unfollow`, {
+                        user_id: this.$store.getters.getId,
+                        follow_id: ownerId
+                    })
+                    .then(response => {
                         this.loadCourseByClick()
-                    return response.data
-                })
+                        return response.data
+                    })
                 return listA
-            }else{
+            } else {
                 this.$awn.warning('Для подписки нужно Авторизоваться', this.$options)
             }
         },
-        async checklikeCourse(){
-            if(this.$store.getters.getId!=null){
-                this.course.id=this.$route.params.id
+        async checklikeCourse() {
+            if (this.$store.getters.getId != null) {
+                this.course.id = this.$route.params.id
                 const listA = await this.axios
-                .get(`${this.$store.getters.getServerUrl}/api/activity/isliked?user_id=${this.$store.getters.getId}&course_id=${this.course.id}`)
-                .then(response => {
-                    if(response.data.result=='liked'){
-                        this.likeText=" Спасибо!"
-                    }else{
-                        this.likeText=" Рекомендую"
-                    }
-                    return response.data
-                })
+                    .get(`${this.$store.getters.getServerUrl}/api/activity/isliked?user_id=${this.$store.getters.getId}&course_id=${this.course.id}`)
+                    .then(response => {
+                        if (response.data.result == 'liked') {
+                            this.likeText = " Спасибо!"
+                        } else {
+                            this.likeText = " Рекомендую"
+                        }
+                        return response.data
+                    })
                 return listA
-            }else{
-                this.likeText=" Рекомендую"
-                
+            } else {
+                this.likeText = " Рекомендую"
+
             }
         },
-        async likeCourse(){
-            if (this.$store.getters.getIsAuthenticated==true){
+        async likeCourse() {
+            if (this.$store.getters.getIsAuthenticated == true) {
                 const listA = await this.axios
-                .post(`${this.$store.getters.getServerUrl}/api/activity/like`,
-                {
-                    user_id : this.$store.getters.getId,
-                    course_id : this.course.id
-                })
-                .then(response => {
+                    .post(`${this.$store.getters.getServerUrl}/api/activity/like`, {
+                        user_id: this.$store.getters.getId,
+                        course_id: this.course.id
+                    })
+                    .then(response => {
                         this.loadCourseByClick()
                         this.checklikeCourse()
-                    return response.data
-                })
+                        return response.data
+                    })
                 return listA
-            }else{
+            } else {
                 this.$awn.warning('Для оценки курса нужно Авторизоваться', this.$options)
             }
         },
-        async loadList(pathUrl)
-		{
-			const listA = await this.axios
-            .get(`${this.$store.getters.getServerUrl}${pathUrl}`)
-            .then(response => response.data)
+        async loadList(pathUrl) {
+            const listA = await this.axios
+                .get(`${this.$store.getters.getServerUrl}${pathUrl}`)
+                .then(response => response.data)
             return listA
         },
-        async loadCourseByClick()
-        {
-            
-            this.course=await this.loadList(`/api/course/${this.$route.params.id}`)
-            this.lessonList=await this.loadList(`/api/lessons/${this.course.id}`)
+        async loadCourseByClick() {
+
+            this.course = await this.loadList(`/api/course/${this.$route.params.id}`)
+            this.lessonList = await this.loadList(`/api/lessons/${this.course.id}`)
             this.loadAuthorInPresent(this.course.owner)
             this.checkFollowAut(this.course.owner)
             this.checkBoughtCourse(this.course.id)
             this.checkSaveCourse(this.course.id)
         },
-        authorClicked:async function(course){
+        authorClicked: async function (course) {
             this.$root.$refs.Author.loadAuthorByClick(course.owner)
         },
-        async loadAuthorInPresent(custom_user)
-        {
-            this.authorPresent=await this.loadList(`/api/accounts/profile/${custom_user}`)
+        async loadAuthorInPresent(custom_user) {
+            this.authorPresent = await this.loadList(`/api/accounts/profile/${custom_user}`)
         },
     },
-    
-    
+
 }
 </script>

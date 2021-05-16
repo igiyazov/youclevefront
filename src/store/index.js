@@ -3,6 +3,7 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+
 // Vue.use(Vuex)
 Vue.use(VueAxios, axios)
 
@@ -63,45 +64,93 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        logout: async(context) => {
+            context.commit('clearLocalStorage')
+            this.$router.push('/')
+        },
+        refresh: async(context) => {
+            let path = '/api/accounts/user/login/refresh';
+            let data = {
+                refresh: context.getters.getRefreshToken
+            }
+            const options = {
+                url: path,
+                baseURL: context.state.baseServer,
+                method: 'POST',
+                data: data,
+            }
+            let response = await axios(options)
+            console.log('Access', response)
+            if (response.status == 200) {
+                context.commit('updateAccessToken', response.data.access)
+                return true
+            }
+            return false
+        },
         request: (context, { auth, method, path, data, params, headers }) => {
-            console.log("Payload", auth, method, path, data, params, headers)
+            // console.log("Payload", auth, method, path, data, params, headers)
             const options = {
                 url: path,
                 baseURL: context.state.baseServer,
                 method: method,
+                headers: headers,
                 data: data,
                 params: params,
-                headers: headers,
             }
             if (auth) {
-                options.headers += {
-                        Authorization: `JWT ${context.state.jwtAccess}`,
-                        'Content-Type': 'application/json'
-                    },
-                    options.xhrFields = {
-                        withCredentials: true
-                    }
+                const authorization = {
+                    Authorization: `JWT ${context.state.jwtAccess}`,
+                    'Content-Type': 'application/json'
+                }
+                options.xhrFields = {
+                    withCredentials: true
+                }
+                options.headers = {...options.headers, ...authorization }
             }
             return options
         },
         authenticatedRequest: async(context, { method, path, data, params, headers }) => {
-            console.log(method, path, data, params, headers)
-            const options = await context.dispatch('request', {
+            let options = await context.dispatch('request', {
                 auth: true,
                 path: path,
                 method: method,
-                headers: headers || undefined,
+                headers: headers,
                 data: data,
                 params: params,
             });
-            console.log(options)
-            axios(options)
-                // .then(response => {
-                //     console.log(response.data)
-                // })
-                // .catch(error => {
-                //     console.log(error)
-                // })
+            // console.log(options)
+            let response = ''
+            try {
+                response = await axios(options)
+                    // axios(options)
+                    //     .then(res => { console.log('ok', res) })
+                    //     .catch(error => {
+                    //         console.log('response: ', error.response.data);
+                    //     });
+            } catch (e) {
+                console.log(e.da)
+                let refresh = await context.dispatch('refresh')
+                console.log('Refresh', refresh)
+                if (refresh) {
+                    options = await context.dispatch('request', {
+                        auth: true,
+                        path: path,
+                        method: method,
+                        headers: headers,
+                        data: data,
+                        params: params,
+                    });
+
+                    response = await axios(options)
+                } else {
+                    console.log("Error")
+                    await context.dispatch('logout')
+                }
+            }
+            console.log('Response', response)
+            console.log('Response status', response.status)
+
+            return response
         },
         // simpleRequest: (context, method, path, data, params, headers) => {
         //     const options = context.dispatch.getRequestOptions(false, method, path, data, params, headers);
@@ -234,3 +283,6 @@ export default new Vuex.Store({
         // }
     }
 })
+
+
+//TODO use tt norms pro

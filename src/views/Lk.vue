@@ -732,7 +732,6 @@ export default {
         this.$root.$refs.Lk=this
         
         this.loadUser()
-        // this.loadCourse()
         this.listLevelLk=await this.loadList("/api/levels")
         this.listLkCategory=await this.loadList("/api/categories")
         this.listLkSubCoteg=await this.loadList(`/api/subcategories/${this.catParams.category}`)
@@ -865,20 +864,22 @@ export default {
         },
         async loadList(pathUrl)
 		{
-            const base = this.$store.getters.getBase
-            const axios = this.axios.create(base)
-			const listA = await axios
-            .get(`${pathUrl}`)
-            .then(response => {
-                return response.data
-            })
+            // const base = this.$store.getters.getBase
+            // const axios = this.axios.create(base)
+			// const listA = await axios
+            // .get(`${pathUrl}`)
+            // .then(response => {
+            //     return response.data
+            // })
 
-            this.$store.dispatch('authenticatedRequest', {
+            let res = await this.$store.dispatch('authenticatedRequest', {
                 method:'get',
-                path:'api/accounts/profile/1/saved',
+                path: pathUrl,
             })
 
-            return listA
+            console.log(res.status)
+
+            return res.data
         },
         async loadUser()
         {
