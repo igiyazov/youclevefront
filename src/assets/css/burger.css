@@ -1,68 +1,78 @@
+.bm-burger-button {
+    cursor: pointer;
+    height: 30px;
+    left: 36px;
+    position: absolute;
+    margin-top: 158px;
+    width: 36px
+}
 
+.bm-burger-button.hidden {
+    display: none
+}
 
-.bm-burger-button{
-    cursor:pointer;
-    height:30px;
-    left:36px;
-    position:absolute;
-    margin-top:158px;
-    width:36px
+.bm-burger-bars {
+    background-color: #0f1435;
 }
-.bm-burger-button.hidden{
-    display:none
+
+.line-style {
+    height: 20%;
+    left: 0;
+    position: absolute;
+    right: 0
 }
-.bm-burger-bars{
-    background-color:#0f1435;
+
+.cross-style {
+    cursor: pointer;
+    position: absolute;
+    right: 2px;
+    top: 12px
 }
-.line-style{
-    height:20%;
-    left:0;
-    position:absolute;
-    right:0
+
+.bm-cross {
+    background: #bdc3c7
 }
-.cross-style{
-    cursor:pointer;
-    position:absolute;
-    right:2px;
-    top:12px
+
+.bm-cross-button {
+    height: 24px;
+    width: 24px
 }
-.bm-cross{
-    background:#bdc3c7
+
+.bm-cross-button.hidden {
+    display: none
 }
-.bm-cross-button{
-    height:24px;
-    width:24px
-}
-.bm-cross-button.hidden{
-    display:none
-}
-.bm-menu{
-    background-color:#fff;
-    height:100%;
-    left:0;
-    overflow-x:hidden;
-    position:fixed;
+
+.bm-menu {
+    background-color: #fff!important;
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    position: fixed;
     padding: 0;
-    top:0;
-    transition:.5s;
-    width:0;
-    z-index:1000
+    top: 0;
+    transition: .5s;
+    width: 0;
+    z-index: 1000
 }
-.bm-overlay{
-    background:rgba(0,0,0,.3)
+
+.bm-overlay {
+    background: rgba(0, 0, 0, .3)
 }
-.bm-item-list{
-    color:#b8b7ad;
-    font-size:20px;
-    margin-left:10%
+
+.bm-item-list {
+    color: #b8b7ad;
+    font-size: 20px;
+    margin-left: 10%
 }
-.bm-item-list>*{
-    display:flex;
-    padding:.7em;
-    text-decoration:none
+
+.bm-item-list>* {
+    display: flex;
+    padding: .7em;
+    text-decoration: none
 }
-.bm-item-list>*>span{
-    color:#fff;
-    font-weight:700;
-    margin-left:10px
+
+.bm-item-list>*>span {
+    color: #fff;
+    font-weight: 700;
+    margin-left: 10px
 }

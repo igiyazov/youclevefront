@@ -109,7 +109,7 @@
             <div class="author-page">
                 <div class="info-wrapper">
                     <div class="avatar">
-                        <img :src="`${authorPresent.photo}`" alt="author-avatar">
+                        <img src="@/assets/img/avatar.png" alt="author-avatar">
                     </div>
                     <div class="author-info-present">
                         <router-link class="present-author-name" :to="`/author/${course.owner}`" @click.native="authorClicked(course)">{{course.username}}

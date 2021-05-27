@@ -102,7 +102,7 @@
 }
 
 .bm-menu {
-    background-color: #fff;
+    background-color: #fff!important;
     height: 100%;
     left: 0;
     overflow-x: hidden;
@@ -345,7 +345,6 @@ body {
     min-width: 40px;
     min-height: 40px;
     border-radius: 50%;
-    background: #979797;
     margin-right: 10px;
 }
 

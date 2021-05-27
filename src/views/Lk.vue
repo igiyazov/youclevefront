@@ -37,7 +37,7 @@
             class="sub-item" :class="{isactiveSub:sub.custom_user.id == selectedSub}"
             @click="selectedSub = sub.custom_user.id, SubClicked(sub), podpiskiLkClicked()">
                 <div class="sub-logo">
-                    <img :src="`${sub.photo}`" alt="author-avatar">
+                    <img src="@/assets/img/avatar.png" alt="author-avatar">
                 </div>
                 <div class="sub-author">{{sub.custom_user.username}}</div>
             </div>
@@ -979,7 +979,7 @@ export default {
         patchProfile()
         {
             const params={
-                poster:this.posterId,
+                // poster:this.posterId,
                 username:this.userParams.userName,
                 email:this.userParams.email,
                 geo:this.userParams.geo,

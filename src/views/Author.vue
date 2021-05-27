@@ -14,7 +14,7 @@
             <div class="author-author-page">
                 <div class="author-info-wrapper">
                     <div class="author-avatar">
-                        <img :src="`${author.photo}`" alt="author-avatar">
+                        <img src="@/assets/img/avatar.png" alt="author-avatar">
                     </div>
                     <div class="author-info">
                         <div class="author-present-author-name">{{author.username}}</div>
@@ -57,7 +57,7 @@
         <div class="author-author-page">
             <div class="author-info-wrapper">
                 <div class="author-avatar">
-                    <img :src="`${author.photo}`" alt="author-avatar">
+                    <img src="@/assets/img/avatar.png" alt="author-avatar">
                 </div>
                 <div class="author-author-info">
                     <div class="author-present-author-name">{{author.username}}</div>
