@@ -75,7 +75,7 @@
                     <a href="#" class="header__link">
                         <transition name="slide-fade">
                         <!-- Header Navigation Menu Icons -->
-                        <img src="../assets/img/avatar.jpg" class="header--button"  @click="showMenu = !showMenu">
+                        <img src="../assets/img/avatar.png" class="header--button"  @click="showMenu = !showMenu">
                         </transition>
                     </a>
                     <!-- Dropdown Menu -->
@@ -295,13 +295,12 @@ export default {
             }
             
             
-            console.log(this.searchList.courses)
         },
         checkAuth: function(){
             if (this.$store.getters.getIsAuthenticated){
                 this.$router.push('/lk')
             }else{
-                this.show=true
+                // this.show=true
                 this.$awn.warning('Для входа в личный кабинет, пожалуйста авторизуйтесь', this.$options)
             }
         },
@@ -309,7 +308,7 @@ export default {
             if (this.$store.getters.getIsAuthenticated){
                 this.$router.push('/saved')
             }else{
-                this.show=true
+                // this.show=true
                 this.$awn.warning('Для просмотра сохраненных, пожалуйста авторизуйтесь', this.$options)
             }
         },
@@ -363,6 +362,13 @@ export default {
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return re.test(email);
             
+        },
+        async loadListSearch(pathUrl)
+        {
+			const listA = await this.axios
+            .get(`${pathUrl}`)
+            .then(response => response.data)
+            return listA
         },
         async loadList(pathUrl)
         {
@@ -535,7 +541,7 @@ export default {
         },
         
         loadSearch:async function(){
-            this.searchList=await this.loadList(`/api/search?search=${this.searchText}`)
+            this.searchList=await this.loadListSearch(`${this.$store.getters.getServerUrl}/api/search?search=${this.searchText}`)
             if(this.searchText.length>0){
                 this.areaShow=true
             }else{

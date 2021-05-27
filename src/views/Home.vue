@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <Presentation />
-    <h3>Катеории</h3>    
+    <h3>Категории</h3>    
     <MainCats :listCategory="listCategory" />
     
     <Recomended :listRec="listRec" />

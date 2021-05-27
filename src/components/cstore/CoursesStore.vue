@@ -4,10 +4,10 @@
             <router-link :to="`/course/${course.id}`" class="video-item" 
             v-for="course in listCourses" :key="course.id"
             @click.native="courseClicked(course)">
-                <div class="price-info">
+                <!-- <div class="price-info">
                     <span class="price-video">{{course.price}}</span>
                     <span class="price">руб.</span>
-                </div>
+                </div> -->
                 <div class="course-img-wrapper">
                     <img class="video-img" :src="`${baseUrl}${course.photo}`" alt="course-img">
                 </div>

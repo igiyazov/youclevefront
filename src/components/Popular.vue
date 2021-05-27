@@ -5,9 +5,9 @@
             <swiper-slide class="course-item" v-for="pop in listPop" :key="pop.id"
             @click.native="courseClicked(pop)"> 
             <router-link :to="`/course/${pop.id}`" >
-                <div class="price-info">
+                <!-- <div class="price-info">
                     <span class="price-video">{{pop.price}} руб.</span>
-                </div>
+                </div> -->
                 <div class="course-img-wrapper">
                     <img class="course-img" :src="`${pop.photo}`" alt="course-img">
                 </div>

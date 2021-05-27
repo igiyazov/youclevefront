@@ -40,9 +40,9 @@ export default {
 	},
     methods: {
         categClicked:async function(categ){
-            this.$root.$refs.CategoriesChoise.selected1 = categ.id
+            this.$root.$refs.Catalog.selected1 = categ.id
             this.$root.$refs.Catalog.CATslugPod="/"+categ.slug
-            this.$root.$refs.CategoriesChoise.categClicked(categ)
+            this.$root.$refs.Catalog.categClicked(categ)
         },
         async loadList(pathUrl)
 		{

@@ -56,10 +56,14 @@ export default {
     },
     async created()
 	{
-        this.$root.$refs.CategoriesChoise = this
+        this.$root.$refs.CategoriesChoise = this;
         this.listCategory=await this.loadList("/api/categories")
         
 	},
+    mounted()
+    {
+        this.$root.$refs.CategoriesChoise = this;
+    },
     computed: {
       baseUrl(){
         return this.$store.getters.getServerUrl

@@ -72,18 +72,18 @@
         </div>
     </div>
     <div class="course-info-wrapper">
-        <div class="present-course-info">
+        <!-- <div class="present-course-info">
             <div class="chose-about">
                 <button class="info-btn" v-on:click="showDisc=true, showDop=false, showCom=false, showAut=false">Описание</button>
             </div>
             <div class="resources">
                 <button class="info-btn" v-on:click="showDop=true, showDisc=false, showCom=false, showAut=false">Дополнительные материалы</button>
             </div>
-            <!-- <div class="comments">
+            <div class="comments">
                 <button class="info-btn" v-on:click="showCom=true, showDisc=false, showDop=false, showAut=false">Комментарии</button>
-            </div> -->
+            </div>
 
-        </div>
+        </div> -->
 
     </div>
 

@@ -15,7 +15,7 @@
             <div class="saved-video-item"
             v-for="savedCourse in savedListCourses" :key="savedCourse.id">
                 <div class="lk-price-info">
-                    <span class="price-video">{{savedCourse.price}} руб.</span>
+                    <!-- <span class="price-video">{{savedCourse.price}} руб.</span> -->
                     <div @click="deleteFromSaveCourse(savedCourse.id)" class="delete fa fa-close"></div>
                 </div>
                 <router-link :to="`/course/${savedCourse.id}`"
@@ -124,8 +124,8 @@ export default {
             })
             return listA
         },
-        reloadSaved(){
-            this.savedListCourses=this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/saved`)
+        async reloadSaved(){
+            this.savedListCourses= await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/saved`)
         },
         toCatalogClicked(){
             this.$root.$refs.Catalog.loadListBy()

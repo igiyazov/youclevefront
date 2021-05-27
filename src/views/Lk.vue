@@ -21,10 +21,10 @@
                 </div>
             <!-- </div> -->
             <!-- <div class="none-promo-info"> -->
-                <div class="wallet-info">
+                <!-- <div class="wallet-info">
                     <div class="bonus">К выплате: </div>
                     <div class="wallet">{{user.bonus}} руб.</div>
-                </div>
+                </div> -->
                 <!-- <div class="sub-info">
                     <div class="count">Подписка закончится:</div>
                     <div class="count-time">{{user.follow_end}}</div>
@@ -60,7 +60,29 @@
                     Подписки
                     </button>
                 </swiper-slide>
-                <swiper-slide v-on:click.native="bought=true,
+                <swiper-slide v-on:click.native="AddCourse=true,
+                    myCourses=false, 
+                    podpiski=false,
+                    aboutMe=false,
+                    pokPod=false,
+                    bankAcc=false,
+                    bought=false,
+                    deleteBtn=false,
+                    catParams.title='',
+                    catParams.overview='',
+                    catParams.price='',
+                    catParams.category='',
+                    catParams.subcategory='',
+                    catParams.level='',
+                    addOrEditCourseText='Добавить',
+                    addCourseTitle='Добавление курса',
+                    removeFilepondFile()">
+                    <button class="choise-item" 
+                    >
+                    Добавить курс
+                    </button>
+                </swiper-slide>
+                <!-- <swiper-slide v-on:click.native="bought=true,
                     myCourses=false, 
                     podpiski=false,
                     AddCourse=false,
@@ -72,7 +94,7 @@
                     >
                     Купленные
                     </button>
-                </swiper-slide>
+                </swiper-slide> -->
                 <swiper-slide v-on:click.native="myCourses=true, 
                     podpiski=false,
                     aboutMe=false,
@@ -99,28 +121,7 @@
                     Обо мне
                     </button>
                 </swiper-slide>
-                <swiper-slide v-on:click.native="AddCourse=true,
-                    myCourses=false, 
-                    podpiski=false,
-                    aboutMe=false,
-                    pokPod=false,
-                    bankAcc=false,
-                    bought=false,
-                    deleteBtn=false,
-                    catParams.title='',
-                    catParams.overview='',
-                    catParams.price='',
-                    catParams.category='',
-                    catParams.subcategory='',
-                    catParams.level='',
-                    addOrEditCourseText='Добавить',
-                    addCourseTitle='Добавление курса',
-                    removeFilepondFile()">
-                    <button class="choise-item" 
-                    >
-                    Добавить курс
-                    </button>
-                </swiper-slide>
+                
                 <!-- <swiper-slide v-on:click.native="pokPod=true,
                     myCourses=false, 
                     podpiski=false,
@@ -132,7 +133,7 @@
                     Подписка на сервис
                     </button>
                 </swiper-slide> -->
-                <swiper-slide v-on:click.native="bankAcc=true,
+                <!-- <swiper-slide v-on:click.native="bankAcc=true,
                     myCourses=false, 
                     podpiski=false,
                     aboutMe=false,
@@ -143,7 +144,7 @@
                     >
                     Вывод бонусов
                     </button>
-                </swiper-slide>
+                </swiper-slide> -->
             </swiper>
         </div>
 
@@ -172,9 +173,9 @@
                     <router-link :to="`/course/${courseSub.id}`" class="author-video-item" 
                     v-for="courseSub in listSubCourses" :key="courseSub.id"
                     @click.native="courseClicked(courseSub)">
-                        <div class="price-info">
+                        <!-- <div class="price-info">
                             <span class="author-price-video">{{courseSub.price}} руб.</span>
-                        </div>
+                        </div> -->
                         <div class="course-img-wrapper">
                             <img class="video-img" :src="`${courseSub.photo}`" alt="course-img">
                         </div>
@@ -221,12 +222,12 @@
 
         <!--BOUGHT START-->
 
-        <div class="my-courses-wrapper" v-show="bought">
+        <!-- <div class="my-courses-wrapper" v-show="bought">
             <div class="no-podpiski" v-show="noBoughtCourses">
                 <span class="buy-desc">Вы еще не купили ни одного курса
                 </span>
                 <div class="no-course-wrapper">
-                    <!-- <span class="no-course-info">Вы пока не добавили ни одного курса</span> -->
+                    !-- <span class="no-course-info">Вы пока не добавили ни одного курса</span> --
                     <div class="add-course-btn-wrapper">
                         <router-link to="/catalog" class="add-course-btn-mycourses"
                         @click.native="toCatalogClicked()"
@@ -255,14 +256,14 @@
                                     <span class="author-video">Видеоуроков(а)</span>
                                 </div>
                                 <div class="author-time-info">
-                                    <!-- <span class="author-sum-time">Время курса</span> -->
+                                    !-- <span class="author-sum-time">Время курса</span> --
                                     <span class="author-time">{{courseMy.course_duration}}</span>
                                 </div>
                             </div>
-                            <!-- <div class="author-raiting">
+                            !-- <div class="author-raiting">
                                 <span class="author-star fa fa-star"></span>
                                 <span class="author-sr-raiting">{{courseMy.rating}}</span>
-                            </div> -->
+                            </div> --
                         </div>
                         <div class="author-course-info">
                             <div class="author-author">
@@ -279,7 +280,7 @@
                     </router-link>
                     </div>
                 </div>    
-        </div>
+        </div> -->
 
         <!--BOUGHT END-->
 
@@ -311,7 +312,7 @@
                 <div class="my-courses">
                     <div class="author-video-item" 
                     v-for="courseMy in listMyCourses" :key="courseMy.id">
-                        <div class="lk-price-info">
+                        <!-- <div class="lk-price-info">
                             <div class="price-wr">
                                 <span @click="AddCourse=true, myCourses=false,
                                 addOrEditCourseText='Обновить',
@@ -321,7 +322,7 @@
                                 " class="edit fa fa-pencil"></span>
                                 <span class="author-price-video">{{courseMy.price}} руб.</span>
                             </div>
-                        </div>
+                        </div> -->
                         <router-link :to="`/course/${courseMy.id}`" 
                         @click.native="courseClicked(courseMy)">
                             <div class="course-img-wrapper">
@@ -374,10 +375,10 @@
         <div class="about-me-wrapper" v-show="aboutMe">
             <h2>Информация об авторе</h2>
             <div class="inputs-wrapper">
-                <div class="photo-wrapper">
+                <!-- <div class="photo-wrapper">
                     <h1>Ваше фото</h1>
                     <Upload />
-                </div>
+                </div> -->
                 <!-- <div class="info-text-wrapper">
                     
                     
@@ -530,7 +531,7 @@
                     <UploadVideo :course="course"/>
                     
                 </div>
-                <div class="info-text-wrapper">
+                <!-- <div class="info-text-wrapper">
                     <h1>Дополнительные материалы</h1>
                     <UploadMaterials />
                     
@@ -542,18 +543,17 @@
                         v-model="catParams.price"
                         :class="applyInputStyleCourse(catParams.price)">
                     </div>
-                </div>
-                <div class="about-price">
+                </div> -->
+                <!-- <div class="about-price">
                     <span>По указанной цене посетители будут покупать Ваш курс, комиссия сервиса 30%, 
                         НО, если покупатель зарегестрировался по Вашей ссылке-приглашению, то комиссия
                          с продажи Ваших курсов не взимается!
                     </span>
-                </div> 
+                </div>  -->
             </div>
             <div class="save-btn-wrapper">
                 <div class="lk-save-btn" @click="(catParams.title.length>0
                     && catParams.overview.length>0
-                    && catParams.price>0
                     && catParams.category>0
                     && catParams.subcategory>0
                     && catParams.level>0)? (callGoodWarnCourse(),scrollToTop()):callBadWarnCourse()">{{addOrEditCourseText}}
@@ -631,13 +631,13 @@
 
         <!--BANK ACCOUNT START-->
 
-        <div class="bank-acc-wrapper" v-show="bankAcc">
+        <!-- <div class="bank-acc-wrapper" v-show="bankAcc">
             <div class="bank-disc">Вывод бонусов производится в конце каждого месяца по указанному номеру карты</div>
             <input class="bank-acc-input" type="text" placeholder="Номер Карты" v-model="billNumber">
             <div class="save-btn-wrapper">
                 <div class="lk-save-btn">Сохранить</div>
             </div>
-        </div>
+        </div> -->
 
         <!--BANK ACCOUNT END-->
         
@@ -652,9 +652,9 @@
 <script>
 import 'vue-awesome-notifications/dist/styles/style.css';
 
-import Upload from "../components/lk/Upload.vue";
+// import Upload from "../components/lk/Upload.vue";
 import UploadPoster from "../components/lk/UploadPoster.vue";
-import UploadMaterials from "../components/lk/UploadMaterials.vue";
+// import UploadMaterials from "../components/lk/UploadMaterials.vue";
 import UploadVideo from "../components/lk/UploadVideo.vue";
 import { Swiper, SwiperSlide  } from 'vue-awesome-swiper'
 import { Slide } from 'vue-burger-menu'
@@ -723,9 +723,9 @@ export default {
         Slide,
         Swiper,
         SwiperSlide,
-        Upload,
+        // Upload,
         UploadPoster,
-        UploadMaterials,
+        // UploadMaterials,
         UploadVideo
     },
     async created(){
