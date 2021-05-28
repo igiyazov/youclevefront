@@ -20,8 +20,9 @@
         <div class="politica">
             <div class="org">© 2021 Сервис YouCleve</div>
             <div class="pol-link">
-                <a href="#">Пользовательское соглашение</a>
-                <a href="#">Политика конфиденциальности</a>
+                <router-link to="/soglashenie">Пользовательское соглашение</router-link>
+                <router-link to="/politika">Политика конфиденциальности</router-link>
+                <router-link to="/aboutpay">Об оплате</router-link>
             </div>
         </div>
     </footer>  

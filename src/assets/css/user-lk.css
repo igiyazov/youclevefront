@@ -335,6 +335,14 @@ body {
     transition: .5s;
 }
 
+.active-like {
+    color: white!important;
+}
+
+.not-active-like {
+    color: #979799!important;
+}
+
 .isactiveSub {
     background: #e4e4e4
 }

@@ -9,6 +9,11 @@ import Author from '../views/Author.vue'
 import Lk from '../views/Lk.vue'
 import Saved from '../views/Saved.vue'
 import SearchCatalog from '../views/SearchCatalog.vue'
+import Politika from '../views/Politika.vue'
+import Soglashenie from '../views/Soglashenie.vue'
+import AboutPay from '../views/AboutPay.vue'
+
+
 
 
 Vue.use(VueRouter)
@@ -57,6 +62,21 @@ const routes = [{
         path: '/searchcatalog',
         name: 'SearchCatalog',
         component: SearchCatalog
+    },
+    {
+        path: '/soglashenie',
+        name: 'Soglashenie',
+        component: Soglashenie
+    },
+    {
+        path: '/politika',
+        name: 'Politika',
+        component: Politika
+    },
+    {
+        path: '/aboutpay',
+        name: 'AboutPay',
+        component: AboutPay
     },
 
     {

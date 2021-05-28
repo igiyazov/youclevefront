@@ -158,7 +158,7 @@
                         v-model="passwordAut">
                     </div>
                     <a type="submit" class="button" @click="checkLogIn()">Войти</a>
-                    <a href="#">Я забыл свой E-mail или пароль</a>
+                    <!-- <a href="#">Я забыл свой E-mail или пароль</a> -->
                 </form>
                 <form class="tab-form" 
                  method="post" novalidate="true"
@@ -199,7 +199,10 @@
                 
                     <div class="recover">
                         <input type="checkbox" id="ckbox" v-model="checked">
-                        <label for="ckbox">Ознакомлен(-а) и принимаю <a href="#">условия регистрации</a></label>
+                        <label for="ckbox">Ознакомлен(-а) и принимаю 
+                            <router-link to="/soglashenie" @click.native="show=!show">Пользовательское соглашение</router-link> 
+                            <router-link to="/politika" @click.native="show=!show">Политика конфиденциальности</router-link> 
+                        </label>
                     </div>
                 </form>
             </div>

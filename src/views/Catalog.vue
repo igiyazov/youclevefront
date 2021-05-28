@@ -40,9 +40,9 @@
             <button v-on:click="showFilter=!showFilter" class="fa fa-tasks filter-btn" >{{ filterText }} </button>
             <ul v-show="showFilter" class="filter-choice">
                 <li><button v-on:click="
-                textFilter1=true, textFilter2=false, textFilter3=false, textFilter4=false, textFilter5=false, showFilter=!showFilter,filtClicked() " class="filter-btn-choice1"> По популярности</button></li>
+                textFilter1=true, textFilter2=false, textFilter3=false, textFilter4=false, textFilter5=false, showFilter=!showFilter,filtClicked() " class="filter-btn-choice1"> По просмотрам</button></li>
                 <li><button v-on:click="
-                textFilter2=true, textFilter1=false, textFilter3=false, textFilter4=false, textFilter5=false, showFilter=!showFilter,filtClicked()" class="filter-btn-choice2"> По рейтингу</button></li>
+                textFilter2=true, textFilter1=false, textFilter3=false, textFilter4=false, textFilter5=false, showFilter=!showFilter,filtClicked()" class="filter-btn-choice2"> По лайкам</button></li>
                 <li><button v-on:click="
                 textFilter3=true, textFilter2=false, textFilter1=false, textFilter4=false, textFilter5=false, showFilter=!showFilter,filtClicked()" class="filter-btn-choice3"> По дате добавления</button></li>
                 <li><button v-on:click="

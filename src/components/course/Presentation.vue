@@ -29,7 +29,10 @@
                 </div>
                 <div class="video-list">
                     <ol>
-                        <li class="present-video-item" v-for="lessonItem in lessonList" :key="lessonItem.id" @click="loadLesson(lessonItem.id)">
+                        <li class="present-video-item" :class="{isactiveLesson:lessonItem.id == selectedLesson}"
+                         v-for="lessonItem in lessonList" 
+                        :key="lessonItem.id" @click="loadLesson(lessonItem.id), selectedLesson=lessonItem.id"
+                        >
                             <div class="present-video-info fa fa-play">
                                 <span class="info">{{lessonItem.title}}</span>
                             </div>
@@ -53,7 +56,9 @@
                 <button v-bind:class="{'fa-bookmark': isActiveSave, 'fa-check-square-o':isActiveDontSave}" v-on:click="saveCourse(course.id)" class="fa">{{ saveText }}</button>
             </div>
             <div class="video-recomend-btn">
-                <button @click="likeCourse()" class="fa fa-thumbs-o-up" v-show="likeShow">{{ likeText }}
+                <button @click="likeCourse()" 
+                v-bind:class="{'active-like': isActiveLike, 'not-active-like':isActiveDontLike}"
+                class="fa fa-thumbs-o-up " v-show="likeShow"> Нравится
                 </button>
                 <!-- <div class="pr-rating-area" v-show="stars">
                     <input type="radio" id="star-5" name="rating" value="5">
@@ -158,6 +163,8 @@ export default {
             buyCourseShow: true,
             playerShow: false,
 
+            selectedLesson:undefined,
+
             showDisc: true,
             showDop: false,
             showCom: false,
@@ -169,6 +176,8 @@ export default {
             isActivePlus: true,
             isActiveSave: true,
             isActiveDontSave: false,
+            isActiveLike: false,
+            isActiveDontLike: true,
             course: {},
             lessonList: [],
             authorPresent: {},
@@ -380,15 +389,18 @@ export default {
                     .get(`${this.$store.getters.getServerUrl}/api/activity/isliked?user_id=${this.$store.getters.getId}&course_id=${this.course.id}`)
                     .then(response => {
                         if (response.data.result == 'liked') {
-                            this.likeText = " Спасибо!"
+                            this.isActiveLike=true
+                            this.isActiveDontLike=false
                         } else {
-                            this.likeText = " Рекомендую"
+                            this.isActiveLike=false
+                            this.isActiveDontLike=true
                         }
                         return response.data
                     })
                 return listA
             } else {
-                this.likeText = " Рекомендую"
+                this.isActiveLike=true
+                this.isActiveDontLike=false
 
             }
         },

@@ -401,7 +401,7 @@
                     </div>
                 </div>
                 <div class="info-text-wrapper">
-                    <h1>Ваши контакты</h1>
+                    <h1>Email</h1>
                     <div class="input-text">
                         <input type="email" placeholder="example@gmail.com" v-model="userParams.email">
                     </div>
@@ -734,7 +734,7 @@ export default {
         this.loadUser()
         this.listLevelLk=await this.loadList("/api/levels")
         this.listLkCategory=await this.loadList("/api/categories")
-        this.listLkSubCoteg=await this.loadList(`/api/subcategories/${this.catParams.category}`)
+        this.listLkSubCoteg=await this.loadList(`/api/allsubcategories/${this.catParams.category}`)
         this.listMyCourses=await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/courses`)
         this.listBoughtCourses=await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/purchases`)
         if (this.$store.getters.getIsAuthenticated==true)
@@ -761,7 +761,7 @@ export default {
                 this.listMyCourses=await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/courses`)
                 this.listLevelLk=await this.loadList("/api/levels")
                 this.listLkCategory=await this.loadList("/api/categories")
-                this.listLkSubCoteg=await this.loadList(`/api/subcategories/${this.catParams.category}`)
+                this.listLkSubCoteg=await this.loadList(`/api/allsubcategories/${this.catParams.category}`)
                 if (this.$store.getters.getIsAuthenticated==true)
                 {
                     this.subscribesList=await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/followings`)
@@ -860,7 +860,7 @@ export default {
              : ('input-no-value')]
         },
         loadSub:async function(){
-            this.listLkSubCoteg=await this.loadList(`/api/subcategories/${this.catParams.category}`)
+            this.listLkSubCoteg=await this.loadList(`/api/allsubcategories/${this.catParams.category}`)
         },
         async loadList(pathUrl)
 		{
@@ -984,10 +984,10 @@ export default {
                 email:this.userParams.email,
                 geo:this.userParams.geo,
                 // site:this.userParams.site,
-                disc:this.userParams.description,
+                description:this.userParams.disc,
             }
             this.axios
-            .patch(`${this.$store.getters.getServerUrl}/api/accounts/profile/${this.user.custom_user}`, params)
+            .put(`${this.$store.getters.getServerUrl}/api/accounts/profile/${this.user.custom_user}`, params)
             .then((result) => result.data)
         },
         loadForEditCourse: async function(courseMy){
