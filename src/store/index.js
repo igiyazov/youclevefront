@@ -11,7 +11,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        baseServer: 'https://84.252.134.196',
+        baseServer: 'https://api.youcleve.com',
         // baseServer: 'http://127.0.0.1:8000',
         // baseServer: 'https://gentle-reef-53739.herokuapp.com',
         // baseServer: 'http://192.168.0.102:8000',
