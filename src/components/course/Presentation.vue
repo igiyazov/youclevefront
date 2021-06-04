@@ -162,8 +162,8 @@ export default {
         return {
             listRec: [],
             listPop: [],
-            buyCourseShow: true,
-            playerShow: false,
+            buyCourseShow: false,
+            playerShow: true,
 
             selectedLesson:undefined,
 
