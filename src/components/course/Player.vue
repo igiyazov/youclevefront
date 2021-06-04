@@ -52,7 +52,9 @@ export default {
     },
     data(){
         return{
+            buyCourseShow:false,
             videoPlaying: false,
+            playerShow:true
         }
     },
     mounted () {

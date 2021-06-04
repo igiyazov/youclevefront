@@ -102,12 +102,11 @@
                 <div class="author-course-info">
                     <div class="author-col-time">
                         <div class="author-video-info">
-                            <span class="author-col-video">{{courseAut.lessons_count}}</span>
-                            <span class="author-video">Видеоуроков(а)</span>
+                            <span class="author-col-video">{{sclonLessons(courseAut.lessons_count)}}</span>
                         </div>
                         <div class="author-time-info">
                             <!-- <span class="author-sum-time">Время курса</span> -->
-                            <span class="author-time">{{courseAut.course_duration}}</span>
+                            <span class="author-time">{{timeToChM(courseAut.course_duration)}}</span>
                         </div>
                     </div>
                     <!-- <div class="author-raiting">
@@ -130,6 +129,7 @@
 </div>
 </template>
 <script>
+import { sclonLessons, timeToChM} from "@/services/services.js";
 export default {
     name: 'Author',
     data(){
@@ -155,6 +155,14 @@ export default {
         
     },
     methods:{
+        timeToChM(time){
+            return timeToChM(time);
+        },
+        sclonLessons(n)
+        {
+            let words = ['видеоурок', 'видеоурока', 'видеоуроков']
+            return n + ' ' + sclonLessons(n, words);
+        },
         async loadList(pathUrl)
 		{
 			const listA = await this.axios
