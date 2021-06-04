@@ -10,17 +10,20 @@
                         <span>Станьте партнером сервиса YouCleve</span>
                     </div>
                     <div class="present-disc">
-                        <span>Загружайте Видео-уроки, приглашайте друзей и близких! 
+                        <span>Загружайте Видео-уроки, зарабатывайте с просмотров! 
                             Поделитесь знаниями со всем Миром!
                         </span>
                     </div>
                 </div>
                 <div class="presentation-btn-wrapper">
-                    <div @click="addCourseClicked()">
+                    <router-link to="/lk" @click.native="addCourseClicked()">
+                        <div class="presentation-btn">Добавить курс</div>
+                    </router-link>
+                    <!-- <div @click="addCourseClicked()">
                         <div class="presentation-btn">
                             Добавить курс
                         </div> 
-                    </div> 
+                    </div>  -->
                 </div>
             </div>
             <div class="present-choice">
@@ -55,12 +58,10 @@ export default {
     methods:{
         addCourseClicked(){
             if (this.$store.getters.getIsAuthenticated){
-                this.$router.push('/lk')
                 this.$root.$refs.Lk.AddCourse=true
                 this.$root.$refs.Lk.podpiski=false
                 this.$root.$refs.Lk.myCourses=false
                 this.$root.$refs.Lk.aboutMe=false
-                this.$root.$refs.Lk.bankAcc=false
             }else{
                 this.$root.$refs.Header.show=true
                 this.$awn.warning('Для входа в личный кабинет, пожалуйста авторизуйтесь', this.$options)

@@ -84,12 +84,11 @@
                 <div class="course-info">
                     <div class="col-time">
                         <div class="video-info">
-                            <span class="col-video">{{course.lessons_count}}</span>
-                            <span class="video">Видеоуроков(а)</span>
+                            <span class="col-video">{{sclonLessons(course.lessons_count)}}</span>
                         </div>
                         <div class="time-info">
                             <!-- <span class="sum-time">Время курса</span> -->
-                            <span class="time">{{course.course_duration}}</span>
+                            <span class="time">{{timeToChM(course.course_duration)}}</span>
                         </div>
                     </div>
                     <!-- <div class="raiting">
@@ -122,6 +121,7 @@
 </template>
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
+import { sclonLessons, timeToChM} from "@/services/services.js";
 import 'swiper/css/swiper.css'
 // import Courses from "../components/catalog/Courses.vue";
 
@@ -203,6 +203,14 @@ export default
     },
 	methods:
 	{
+        timeToChM(time){
+            return timeToChM(time);
+        },
+        sclonLessons(n)
+        {
+            let words = ['видеоурок', 'видеоурока', 'видеоуроков']
+            return n + ' ' + sclonLessons(n, words);
+        },
         podClicked:async function(pod){
             this.key="&level="+pod.key
             this.loadListBy()

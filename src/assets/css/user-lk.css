@@ -337,10 +337,12 @@ body {
 
 .active-like {
     color: white!important;
+    border-color: white!important;
 }
 
 .not-active-like {
     color: #979799!important;
+    border-color: #979799!important;
 }
 
 .isactiveSub {
@@ -793,9 +795,14 @@ h2 {
     margin-top: 30px;
 }
 
+.sub-img {
+    width: 50%;
+    margin-top: 30px;
+}
+
 .lk-present-row {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .lk-present-choice {
@@ -808,11 +815,14 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 30px;
 }
 
 .lk-present-text-wrapper {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .lk-present-title {
@@ -935,7 +945,7 @@ h2 {
         padding: 0 10px;
     }
     .bm-burger-button {
-        margin-top: 135px;
+        margin-top: 130px;
         left: 10px;
         height: 20px;
         width: 25px;
@@ -970,11 +980,8 @@ h2 {
     .about-price {
         text-align: center;
     }
-    .lk-present-row {
-        flex-direction: column;
-    }
     .lk-present-choice {
-        width: 100%;
+        width: 90%;
     }
     .bank-acc-input {
         width: 100%;
@@ -1026,11 +1033,8 @@ h2 {
     .about-price {
         text-align: start;
     }
-    .lk-present-row {
-        flex-direction: row;
-    }
     .lk-present-choice {
-        width: 48%;
+        width: 60%;
     }
     .bank-acc-input {
         width: 50%;
@@ -1057,6 +1061,9 @@ h2 {
     }
     .inputs-wrapper {
         width: 80%;
+    }
+    .lk-present-choice {
+        width: 50%;
     }
 }
 

@@ -12,6 +12,7 @@ import SearchCatalog from '../views/SearchCatalog.vue'
 import Politika from '../views/Politika.vue'
 import Soglashenie from '../views/Soglashenie.vue'
 import AboutPay from '../views/AboutPay.vue'
+import Podpiska from '../views/Podpiska.vue'
 
 
 
@@ -77,6 +78,11 @@ const routes = [{
         path: '/aboutpay',
         name: 'AboutPay',
         component: AboutPay
+    },
+    {
+        path: '/podpiska',
+        name: 'Podpiska',
+        component: Podpiska
     },
 
     {

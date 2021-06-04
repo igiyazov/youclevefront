@@ -117,7 +117,7 @@
     <div class="all-courses">
         <ul>
             <li><router-link to="/catalog" @click.native="loadCatalog()">Каталог</router-link></li>
-            <li><div class="ch-head-item" @click="checkAuth()">Подписки</div></li>
+            <li><router-link to="/podpiska" class="ch-head-item">Подписка</router-link></li>
             <li><div class="ch-head-item" @click="checkAuthForSaved(),loadlistSavedCourses()">Сохраненное</div></li>
             <li><div class="ch-head-item" @click="checkAuth()" >Личный кабинет</div></li>
         </ul>

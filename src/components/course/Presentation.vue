@@ -25,7 +25,7 @@
 
             <div class="playlist">
                 <div class="summary-time">
-                    {{course.lessons_count}} Уроков({{course.course_duration}})
+                    <span>{{sclonLessons(course.lessons_count)}}</span><span>{{timeToChM(course.course_duration)}}</span>
                 </div>
                 <div class="video-list">
                     <ol>
@@ -36,7 +36,7 @@
                             <div class="present-video-info fa fa-play">
                                 <span class="info">{{lessonItem.title}}</span>
                             </div>
-                            <span class="duration">{{lessonItem.duration}}</span>
+                            <span class="duration">{{calculTime(lessonItem.duration)}}</span>
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,8 @@
             <div class="save-btn">
                 <button v-bind:class="{'fa-bookmark': isActiveSave, 'fa-check-square-o':isActiveDontSave}" v-on:click="saveCourse(course.id)" class="fa">{{ saveText }}</button>
             </div>
-            <div class="video-recomend-btn">
+            <div v-bind:class="{'active-like': isActiveLike, 'not-active-like':isActiveDontLike}"
+             class="video-recomend-btn">
                 <button @click="likeCourse()" 
                 v-bind:class="{'active-like': isActiveLike, 'not-active-like':isActiveDontLike}"
                 class="fa fa-thumbs-o-up " v-show="likeShow"> Нравится
@@ -154,6 +155,7 @@
 import Recomended from "../Recomended.vue";
 import Popular from "../Popular.vue";
 import Player from "./Player.vue";
+import { calculTime, sclonLessons, timeToChM} from "@/services/services.js";
 export default {
     name: "Presentation",
     data() {
@@ -218,6 +220,17 @@ export default {
         },
     },
     methods: {
+        timeToChM(time){
+            return timeToChM(time);
+        },
+        sclonLessons(n)
+        {
+            let words = ['урок', 'урока', 'уроков']
+            return n + ' ' + sclonLessons(n, words);
+        },
+        calculTime(time) {
+            return calculTime(time)
+        },
         forceRerender() {
             this.componentKey += 1;
         },

@@ -9,7 +9,7 @@
                     <nav>
                         <ul class="nav">
                             <li><router-link to="/catalog" @click.native="loadCatalog(),scrollBehavior()">Каталог</router-link></li>
-                            <li><div class="footer-item" @click="checkAuth(), podpiskiClicked(),scrollBehavior()">Подписки</div></li>
+                            <li><router-link to="/podpiska" class="footer-item" @click="scrollBehavior()">Подписка</router-link></li>
                             <li><div class="footer-item" @click="checkAuthForSaved(),loadlistSavedCourses(),scrollBehavior()">Сохраненное</div></li>
                             <li><div class="footer-item" @click="checkAuth(), podpiskiClicked(),scrollBehavior()" >Личный кабинет</div></li>
                         </ul>

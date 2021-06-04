@@ -32,12 +32,11 @@
                     <div class="course-info">
                         <div class="col-time">
                             <div class="video-info">
-                                <span class="col-video">{{savedCourse.lessons_count}}</span>
-                                <span class="video">Видеоуроков(а)</span>
+                                <span class="col-video">{{sclonLessons(savedCourse.lessons_count)}}</span>
                             </div>
                             <div class="time-info">
                                 <!-- <span class="sum-time">Время курса</span> -->
-                                <span class="time">{{savedCourse.course_duration}}</span>
+                                <span class="time">{{timeToChM(savedCourse.course_duration)}}</span>
                             </div>
                         </div>
                         <!-- <div class="raiting">
@@ -64,6 +63,7 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { sclonLessons, timeToChM} from "@/services/services.js";
 export default {
     name:"Saved",
     
@@ -107,6 +107,14 @@ export default {
         }
     },
     methods: {
+        timeToChM(time){
+            return timeToChM(time);
+        },
+        sclonLessons(n)
+        {
+            let words = ['видеоурок', 'видеоурока', 'видеоуроков']
+            return n + ' ' + sclonLessons(n, words);
+        },
         scrollToTop() {
             window.scrollTo(0,0)
         },

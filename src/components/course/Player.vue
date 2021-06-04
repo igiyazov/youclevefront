@@ -4,7 +4,8 @@
                     <span class="buy-desc">
                         Доступ по подписке
                     </span>
-                    <div @click="buyCourse(course.id)" class="buy-btn">Оформить подписку</div>
+                    <router-link to="/podpiska" class="buy-btn">Оформить подписку</router-link>
+                    <!-- <div @click="buyCourse(course.id)" class="buy-btn">Оформить подписку</div> -->
                 </div>
                 <div class="player" v-show="playerShow">
                     <vue-plyr ref="plyr">

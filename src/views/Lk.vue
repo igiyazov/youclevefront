@@ -188,12 +188,11 @@
                         <div class="author-course-info">
                             <div class="author-col-time">
                                 <div class="author-video-info">
-                                    <span class="author-col-video">{{courseSub.lessons_count}}</span>
-                                    <span class="author-video">Видеоуроков(а)</span>
+                                    <span class="author-col-video">{{sclonLessons(courseSub.lessons_count)}}</span>
                                 </div>
                                 <div class="author-time-info">
                                     <!-- <span class="author-sum-time">Время курса</span> -->
-                                    <span class="author-time">{{courseSub.course_duration}}</span>
+                                    <span class="author-time">{{timeToChM(courseSub.course_duration)}}</span>
                                 </div>
                             </div>
                             <!-- <div class="author-raiting">
@@ -338,12 +337,11 @@
                             <div class="author-course-info">
                                 <div class="author-col-time">
                                     <div class="author-video-info">
-                                        <span class="author-col-video">{{courseMy.lessons_count}}</span>
-                                        <span class="author-video">Видеоуроков(а)</span>
+                                        <span class="author-col-video">{{sclonLessons(courseMy.lessons_count)}}</span>
                                     </div>
                                     <div class="author-time-info">
                                         <!-- <span class="author-sum-time">Время курса</span> -->
-                                        <span class="author-time">{{courseMy.course_duration}}</span>
+                                        <span class="author-time">{{timeToChM(courseMy.course_duration)}}</span>
                                     </div>
                                 </div>
                                 <!-- <div class="author-raiting">
@@ -657,6 +655,7 @@ import UploadPoster from "../components/lk/UploadPoster.vue";
 // import UploadMaterials from "../components/lk/UploadMaterials.vue";
 import UploadVideo from "../components/lk/UploadVideo.vue";
 import { Swiper, SwiperSlide  } from 'vue-awesome-swiper'
+import { sclonLessons, timeToChM} from "@/services/services.js";
 import { Slide } from 'vue-burger-menu'
 import { mapGetters } from 'vuex';
 import 'swiper/css/swiper.css'
@@ -771,6 +770,14 @@ export default {
         }
     },
     methods:{
+        timeToChM(time){
+            return timeToChM(time);
+        },
+        sclonLessons(n)
+        {
+            let words = ['видеоурок', 'видеоурока', 'видеоуроков']
+            return n + ' ' + sclonLessons(n, words);
+        },
         removeFilepondFile(){
             this.$root.$refs.UploadPoster.removeFile()
             this.$root.$refs.UploadVideo.removeFile()
