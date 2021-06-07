@@ -248,8 +248,8 @@ export default {
                 password:"",
                 username:"", 
             },
-            emailAut:"admin@admin.co",
-            passwordAut:"admin",
+            emailAut:"",
+            passwordAut:"",
             secPass:""
 
         }
