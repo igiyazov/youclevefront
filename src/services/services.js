@@ -20,20 +20,6 @@ function sclonLessons(n, text_forms) {
     return text_forms[2];
 }
 
-// function sclonLessons(n) {
-
-//     let text = '';
-//     if (n == 0) {
-//         return text;
-//     }
-//     n = Math.abs(n) % 100;
-//     var n1 = n % 10;
-//     if (n > 10 && n < 20) { text = ' уроков'; }
-//     if (n1 > 1 && n1 < 5) { text = ' урока'; }
-//     if (n1 == 1) { text = ' урок'; }
-
-//     return n + text;
-// }
 
 function timeToChM(time) {
     let new_time = '';

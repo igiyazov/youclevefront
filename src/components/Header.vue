@@ -212,7 +212,7 @@
 
 </template>
 <script>
-
+import { mapActions } from "vuex";
 export default {
     name: 'Header',
     data(){
@@ -248,8 +248,8 @@ export default {
                 password:"",
                 username:"", 
             },
-            emailAut:"",
-            passwordAut:"",
+            emailAut:"admin@admin.co",
+            passwordAut:"admin",
             secPass:""
 
         }
@@ -280,6 +280,7 @@ export default {
         this.changeLogoOrSign()
     },
     methods:{
+        ...mapActions('subscription', ['isUserSubscribe', 'setResult']),
         goToSearchCat: function(){
             if(this.searchList.courses.length>0){
                 this.areaShow=false,
@@ -452,11 +453,14 @@ export default {
                     this.$store.commit('updateUsername', response.data.user)
                     this.$store.commit('updateId', response.data.id)
                     this.$store.commit('setIsAuthenticated', true)
-                    
+                    if (response.data.id)
+                        this.isUserSubscribe(response.data.id);
                     this.callGoodWarnSignIn()
                     this.showLogo=true
                     this.logIn=false
                     this.$root.$refs.Presentation.loadCourseByClick()
+
+                    
                     
                 }else{
                     this.callBadWarnSignIn()
@@ -499,11 +503,16 @@ export default {
         // },
         async logOut()
         {
+            this.setResult(false);
             this.$store.commit('clearLocalStorage')
             this.$router.push('/')
             this.$awn.warning('Вы вышли из аккаунта! До скорых встреч', this.$options)
             this.logIn=true
             this.showLogo=false
+            
+            // this.$store.commit('subscription/SET_RESULT', false);
+            // this.SET_RESULT(false);
+            
             // const base = this.$store.getters.getBase
             // const axios = this.axios.create(base)
             // const listA = await axios
@@ -570,6 +579,8 @@ export default {
         async loadlistSavedCourses() { 
             this.$root.$refs.Saved.savedListCourses=await this.loadList(`/api/accounts/profile/${this.$store.getters.getId}/saved`)   
         },
+        
+        // ...mapMutations('subscription', ['SET_RESULT'])
         
         }
 }

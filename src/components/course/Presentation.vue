@@ -205,6 +205,7 @@ export default {
         this.listRec = await this.loadList("/api/courses?filter=recommended")
         this.listRec = this.listRec.results
         // this.checkFollowAut()
+        console.log(this.course)
         console.log(this.$refs)
         // this.$refs.plyr.player.on('playing', event => {
         //     console.log(event)
@@ -218,6 +219,7 @@ export default {
         baseUrl() {
             return this.$store.getters.getServerUrl
         },
+
     },
     methods: {
         timeToChM(time){
@@ -412,8 +414,8 @@ export default {
                     })
                 return listA
             } else {
-                this.isActiveLike=true
-                this.isActiveDontLike=false
+                this.isActiveLike=false
+                this.isActiveDontLike=true
 
             }
         },

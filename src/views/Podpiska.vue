@@ -55,14 +55,47 @@
                     </div> -->
                 </div>
                 <div class="lk-presentation-btn-wrapper">
-                    <div class="lk-presentation-btn">Перейти к оплате</div> 
+                    <div class="lk-presentation-btn"
+                    @click="checkAuthForSub()">{{paymentText}}</div> 
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script>
+import { mapActions, mapGetters } from "vuex";
 
+export default {
+    data(){
+        return {
+            isSubed:false,
+        }
+    },
+    async mounted() {
+        const user_id = this.$store.getters.getId
+        const res = await this.isUserSubscribe(user_id);
+        this.isSubed = res
+        // console.log(res.detail);
+    },
+    computed: {
+        paymentText(){
+            return this.isSubed ? 'Вы уже подписаны' : 'Перейти к оплате';
+        },
+
+        ...mapGetters('subscription', ['getIsSubscribed'])
+    },
+    methods: {
+        checkAuthForSub: function(){
+            if (this.$store.getters.getIsAuthenticated){
+                this.$awn.success('Вы подписаны', this.$options)
+            }else{
+                // this.show=true
+                this.$awn.warning('Для покупки, пожалуйста авторизуйтесь', this.$options)
+            }
+        },
+        ...mapActions('subscription', ['isUserSubscribe'])
+    },
+}
 </script>
 <style scoped>
 </style>

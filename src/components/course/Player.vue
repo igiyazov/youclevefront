@@ -1,13 +1,13 @@
 <template>
 <div class="present-video">
-                <div class="buy-course" v-show="buyCourseShow">
+                <div class="buy-course" v-show="!isSubscribed">
                     <span class="buy-desc">
                         Доступ по подписке
                     </span>
-                    <!-- <router-link to="/podpiska" class="buy-btn">Оформить подписку</router-link> -->
-                    <div @click="buyCourse(course.id)" class="buy-btn">Оформить подписку</div>
+                    <router-link to="/podpiska" class="buy-btn">Оформить подписку</router-link>
+                    <!-- <div @click="buyCourse(course.id)" class="buy-btn">Оформить подписку</div> -->
                 </div>
-                <div class="player" v-show="playerShow">
+                <div class="player" v-show="isSubscribed">
                     <vue-plyr ref="plyr">
                         <video controls crossorigin playsinline :src="`${this.lesson.videos}`">
                             <!-- <source
@@ -41,6 +41,7 @@
             </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
     name: "Player",
     props: {
@@ -55,8 +56,16 @@ export default {
             videoPlaying: false,
         }
     },
-    mounted () {
+    async mounted () {
         // console.log(this.$refs.plyr.player)
+        const user_id = this.$store.getters.getId
+        console.log('Workkkk')
+        console.log(user_id)
+        if (user_id)
+        {
+            const res = await this.isUserSubscribe(user_id);
+            console.log(res);
+        }
         this.$refs.plyr.player.on('play', event => {
             if (!this.videoPlaying) {
                 console.log('eve',event.detail.plyr);
@@ -65,6 +74,11 @@ export default {
             }
             
         });
+    },
+    computed:{
+        isSubscribed(){
+            return this.$store.getters.getIsSubscribed
+        }
     },
     methods:
     {
@@ -99,7 +113,8 @@ export default {
                     })
             console.log(resp)
             return resp
-        }
+        },
+        ...mapActions('subscription', ['isUserSubscribe'])
 
     }
 }

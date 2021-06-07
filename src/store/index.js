@@ -3,6 +3,8 @@ import Vue from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
+import subscription from './modules/subscription.module'
+
 
 // Vue.use(Vuex)
 Vue.use(VueAxios, axios)
@@ -14,13 +16,14 @@ export default new Vuex.Store({
         baseServer: 'https://api.youcleve.com',
         // baseServer: 'http://127.0.0.1:8000',
         // baseServer: 'https://gentle-reef-53739.herokuapp.com',
-        // baseServer: 'http://192.168.0.102:8000',
+        // baseServer: 'https://84.252.133.121',
 
         authUser: {},
         user: {
             username: '',
             id: '',
         },
+        isSubscribed: false,
         isAuthenticated: false,
         jwtAccess: localStorage.getItem('access'),
         jwtRefresh: localStorage.getItem('refresh'),
@@ -29,6 +32,9 @@ export default new Vuex.Store({
         updateId(state, value) {
             Vue.set(state, 'user.id', value)
             localStorage.setItem('id', value)
+        },
+        setIsSubscribed(state, value) {
+            state.isSubscribed = value;
         },
         setIsAuthenticated(state, value) {
             Vue.set(state, 'isAuthenticated', value)
@@ -163,7 +169,7 @@ export default new Vuex.Store({
         //         })
         // },
     },
-    modules: {},
+    modules: { subscription },
     getters: {
         getServerUrl: state => {
             return state.baseServer
@@ -175,6 +181,9 @@ export default new Vuex.Store({
             if (state.user.id)
                 return state.user.id
             return localStorage.getItem('id')
+        },
+        getIsSubscribed: state => {
+            return state.isSubscribed;
         },
         getIsAuthenticated: state => {
             return state.isAuthenticated
