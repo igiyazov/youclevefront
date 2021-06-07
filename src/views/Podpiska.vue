@@ -87,7 +87,7 @@ export default {
     methods: {
         checkAuthForSub: function(){
             if (this.$store.getters.getIsAuthenticated){
-                this.$awn.success('Вы подписаны', this.$options)
+                this.$awn.warning('Здесь будет оплата', this.$options)
             }else{
                 // this.show=true
                 this.$awn.warning('Для покупки, пожалуйста авторизуйтесь', this.$options)
